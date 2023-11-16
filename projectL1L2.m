@@ -14,9 +14,10 @@ function xProj = projectL1L2(x,c)
 
 convergenceCrit = 1e-5;
 maxIter = 100;
+nMax = sum(max(abs(x))==abs(x));
 
-if c<=1
-    [m i] = max(abs(x));
+if sqrt(nMax)>=c % c<=1 or pathological duplicate max values
+    [~,i] = max(abs(x));
     xProj = zeros(numel(x),1);
     xProj(i) = c*sign(x(i));
 else
